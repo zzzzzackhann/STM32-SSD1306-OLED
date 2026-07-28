@@ -1,6 +1,6 @@
 /* Many diagonal lines!!!. */
 
-#include <stdint.h> //for data types
+#include <stdint.h> // for data types
 #include "registers.h" 
 #include "i2c.h"
 #include "uart.h"
@@ -22,29 +22,25 @@ int main(void) {
     // systick_init();
 
     int8_t dx = 2;
-    uint8_t dy = 2;
-    uint8_t x = 0;
-    uint8_t y = 0;
+    int8_t dy = 4;
+    int8_t x = 0;
+    int8_t y = 0;
+
+    char string[] = "I love you Sofi :)";
     
     while(1) {
 
         clear_framebuffer();
+        draw_string(string, x, y);
 
-        for(uint8_t i = 0; i < 20; i++){
-            set_pixel(i + x, 0 + y);
-            set_pixel(i + x , 20 + y);
-            set_pixel(0 + x, i + y);
-            set_pixel(20 + x, i + y);
-        }
-        
         x += dx;
         y += dy;
 
-
-        if(x <=0 || x >= 106) dx = -dx;
-        if(y <=0 || y >= 42) dy = -dy;
+        if(x <=0 || x >= (127 - ((sizeof(string) * 6)))) dx = -dx; // number of chars in string[], plus 1 for the null character, 6 pixels each (5 for character, 1 for space)
+        if(y <=0 || y >= 55) dy = -dy; // size of frame(y) which is 63, minus height of chacaters (8)
 
         display_framebuffer();
     }
 }
 
+/* Order of operations really matters here. First, run the program. The check the values for the next loop, adjust the values, and loop.  */

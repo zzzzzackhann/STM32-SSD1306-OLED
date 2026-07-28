@@ -1,4 +1,4 @@
-TARGET = I2C-07-anim.1
+TARGET = I2C-07-anim.2
 
 CC      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
