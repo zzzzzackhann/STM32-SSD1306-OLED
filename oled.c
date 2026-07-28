@@ -46,3 +46,13 @@ void display_framebuffer(void) {
 
     i2c_write(0x3C, cmd, 1025);
 }
+
+static const uint8_t memory_addressing_config[] = {0x00, 0x20, 0x20}; // for horizontal memory addressing
+static const uint8_t column_address_range[] = {0x00, 0x21, 0, 127}; //sets column address range of 0-127 (whole display)
+static const uint8_t page_address_range[] = {0x00, 0x22, 0, 7}; // for pages 0-8
+
+void ssd1306_set_draw_window(void){
+    i2c_write(0x3C, memory_addressing_config, sizeof(memory_addressing_config) / sizeof(memory_addressing_config[0]));
+    i2c_write(0x3C, column_address_range, sizeof(column_address_range) / sizeof(column_address_range[0]));
+    i2c_write(0x3C, page_address_range, sizeof(page_address_range) / sizeof(page_address_range[0]));
+}

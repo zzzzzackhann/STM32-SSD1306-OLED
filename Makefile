@@ -1,4 +1,4 @@
-TARGET = I2C-05.2
+TARGET = I2C-06-text
 
 CC      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy

@@ -17,16 +17,8 @@ int main(void) {
     usart_init();
     i2c_check_addresses();
     ssd1306_oled_init();
+    ssd1306_set_draw_window();  
 
-    uint8_t memory_addressing_config[] = {0x00, 0x20, 0x20}; // for horizontal memory addressing
-    uint8_t column_address_range[] = {0x00, 0x21, 0, 127}; //sets column address range of 0-127 (whole display)
-    uint8_t page_address_range[] = {0x00, 0x22, 0, 7}; // for pages 0-8
-
-    i2c_write(0x3C, memory_addressing_config, sizeof(memory_addressing_config) / sizeof(memory_addressing_config[0]));
-    i2c_write(0x3C, column_address_range, sizeof(column_address_range) / sizeof(column_address_range[0]));
-    i2c_write(0x3C, page_address_range, sizeof(page_address_range) / sizeof(page_address_range[0]));
-
-    
     clear_framebuffer();
 
     for(uint8_t i = 0; i < 128; i += 10) {

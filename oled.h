@@ -7,5 +7,6 @@ void ssd1306_oled_init(void);
 void set_pixel(uint8_t x, uint8_t y);
 void clear_framebuffer(void);
 void display_framebuffer(void);
+void ssd1306_set_draw_window(void);
 
 #endif
