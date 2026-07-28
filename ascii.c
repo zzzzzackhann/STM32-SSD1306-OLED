@@ -1,15 +1,5 @@
-/* Many diagonal lines!!!. */
-
-#include <stdint.h> //for data types
-#include "registers.h" 
-#include "i2c.h"
-#include "uart.h"
+#include <stdint.h>
 #include "oled.h"
-
-void clock_enable(void) {
-    RCC_APB1ENR |= (1 << 21) | (1 << 17); // I2C1 and USART 2
-    RCC_AHB1ENR |= (1 << 0) | (1 << 1); // GPIOA and GPIOB
-}
 
 // 5x8 font. Each glyph = 5 bytes (one per column, left to right).
 // Within each byte: bit 0 = top pixel, bit 7 = bottom.
@@ -119,22 +109,3 @@ void draw_string(char *c, uint8_t x, uint8_t y) {
         }
     }
 }
-
-int main(void) {
-    clock_enable();
-    i2c_init();
-    usart_init();
-    i2c_check_addresses();
-    ssd1306_oled_init();
-    ssd1306_set_draw_window();  
-
-    clear_framebuffer();
-
-    draw_string("I LOVE YOU SOFI :)", 5, 10);
-    draw_string("I made it so it wraps around the screen like a real text editor. Could be cool for little poems or things like that.", 5, 18);
-
-    display_framebuffer();
-
-    while(1) {}
-}
-
