@@ -1,4 +1,4 @@
-TARGET = I2C-06-text
+TARGET = I2C-07-anim.1
 
 CC      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
@@ -6,7 +6,7 @@ OBJCOPY = arm-none-eabi-objcopy
 CFLAGS = -mcpu=cortex-m4 -mthumb -O0 -g -Wall
 LDFLAGS = -T stm32f446.ld -nostartfiles
 
-SRCS = $(TARGET).c i2c.c uart.c oled.c startup.s
+SRCS = $(TARGET).c i2c.c uart.c oled.c systick.c startup.s
 
 $(TARGET).elf: $(SRCS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@

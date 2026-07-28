@@ -13,7 +13,7 @@ static const uint8_t oled_init_seq[] = {
     0x81, 0x7F, // set contrast control (this is the default)
     0xA4, // entire display ON, output follows RAM content
     0xA6, // sets normal display (not inverted)
-    0xD5, 0x80, // define divide ratio of internal clock (CLK) and display divider (D)
+    0xD5, 0xF0, // define internal clock (CLK, set to max (0xF)) and display divider (D, set to min (0x0)_
     0x8D, 0x14, // enable charge pump regulator
     0xAF // display ON
 };
