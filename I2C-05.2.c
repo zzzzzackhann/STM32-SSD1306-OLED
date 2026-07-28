@@ -1,4 +1,4 @@
-/* Added framebuffer and functions to push framebuffer to display. Displayed a diagonal line. */
+/* Many diagonal lines!!!. */
 
 #include <stdint.h> //for data types
 #include "registers.h" 
@@ -29,11 +29,26 @@ int main(void) {
     
     clear_framebuffer();
 
+    for(uint8_t i = 0; i < 128; i += 10) {
+        for(uint8_t j = 0; j < 64; j++) {
+            uint16_t x = j * 2 + i; 
+            if(x < 128) {
+                set_pixel(x, j);
+            }
+        } 
+    }
+
     for(uint8_t i = 0; i < 64; i++) {
-        set_pixel(i * 2, i);
+        for(uint8_t j = 0; j < 64; j += 5) {
+            uint16_t y = j + i; 
+            if(y < 64){
+                set_pixel(i * 2, y);
+            }  
+        } 
     }
 
     display_framebuffer();
 
     while(1) {}
 }
+
